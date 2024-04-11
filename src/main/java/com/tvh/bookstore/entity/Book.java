@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,8 +19,9 @@ public class Book {
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name="img")
-    private String img;
+    @Lob // Annotation @Lob được sử dụng để ánh xạ trường img thành kiểu dữ liệu BLOB hoặc clob trong cơ sở dữ liệu
+    @Column(name="img", columnDefinition="BLOB")
+    private byte[] img;
     @Column(name = "price")
     private double price;
     @Column(name = "author")
@@ -28,7 +30,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(int idBook, String title, String description, String img, double price, String author) {
+    public Book(int idBook, String title, String description, byte[] img, double price, String author) {
         this.idBook = idBook;
         this.title = title;
         this.description = description;
@@ -61,11 +63,11 @@ public class Book {
         this.description = description;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 

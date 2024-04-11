@@ -1,5 +1,6 @@
 package com.tvh.bookstore.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tvh.bookstore.entity.Book;
 import com.tvh.bookstore.service.IBookService;
@@ -34,11 +37,32 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
+    // @PostMapping
+    // public ResponseEntity<Book> addBook(@RequestBody Book book) {
+    //     Book savedBook = bookService.addBook(book);
+    //     return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
+    // }
+
     @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book savedBook = bookService.addBook(book);
-        return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
-    }
+public ResponseEntity<Book> addBook(@RequestParam("title") String title,
+                                     @RequestParam("description") String description,
+                                     @RequestParam("img") MultipartFile imgFile,
+                                     @RequestParam("price") double price,
+                                     @RequestParam("author") String author) throws IOException {
+    // Xử lý tệp hình ảnh từ imgFile, chuyển thành byte[]
+    byte[] imgData;
+    imgData = imgFile.getBytes();
+    // Tạo đối tượng Book từ dữ liệu nhận được từ yêu cầu
+    Book book = new Book();
+    book.setTitle(title);
+    book.setDescription(description);
+    book.setImg(imgData);
+    book.setPrice(price);
+    book.setAuthor(author);
+        // Thêm sách vào cơ sở dữ liệu và trả về phản hồi
+    Book savedBook = bookService.addBook(book);
+    return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
+}
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateBook(@PathVariable int id, @RequestBody Book bookDetails) {

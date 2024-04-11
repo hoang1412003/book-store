@@ -10,6 +10,11 @@ import com.tvh.bookstore.entity.Book;
 import com.tvh.bookstore.repository.IBookRepository;
 import com.tvh.bookstore.service.IBookService;
 
+import jakarta.servlet.annotation.MultipartConfig;
+@MultipartConfig(fileSizeThreshold = 1024 *1024,
+maxFileSize = 1024*1024*10,
+maxRequestSize = 1024*1024*11
+)
 @Service
 public class BookService implements IBookService {
     @Autowired
@@ -27,6 +32,7 @@ public class BookService implements IBookService {
     
     @Override
     public Book addBook(Book book) {
+      
         return bookRepository.save(book);
     }
 
