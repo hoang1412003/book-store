@@ -24,7 +24,7 @@ public class BookController {
     @Autowired
     private IBookService bookService;
 
-    @GetMapping
+    @GetMapping("/public/listbook")
     public List<Book> getBookList() {
         return bookService.getList();
     }
@@ -34,7 +34,7 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping
+    @PostMapping("/admin/savebook")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         Book savedBook = bookService.addBook(book);
         return new ResponseEntity<>(savedBook, HttpStatus.CREATED);

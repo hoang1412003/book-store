@@ -1,4 +1,5 @@
-package dto;
+package com.tvh.bookstore.dto;
+
 
 import java.util.List;
 

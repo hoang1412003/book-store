@@ -1,6 +1,6 @@
 package com.tvh.bookstore.service;
 
-import dto.ReqRes;
+import com.tvh.bookstore.dto.ReqRes;
 
 public interface IAuthService {
     public ReqRes signUp(ReqRes registrationRequest);
