@@ -18,8 +18,8 @@ public class Book {
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name="img")
-    private String img;
+    @Column(name="img", columnDefinition="BLOB")
+    private byte[] img;
     @Column(name = "price")
     private double price;
     @Column(name = "author")
@@ -27,8 +27,10 @@ public class Book {
     
     public Book() {
     }
+    
+    
 
-    public Book(int idBook, String title, String description, String img, double price, String author) {
+    public Book(int idBook, String title, String description, byte[] img, double price, String author) {
         this.idBook = idBook;
         this.title = title;
         this.description = description;
@@ -36,6 +38,8 @@ public class Book {
         this.price = price;
         this.author = author;
     }
+
+
 
     public int getIdBook() {
         return idBook;
@@ -61,13 +65,6 @@ public class Book {
         this.description = description;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
 
     public double getPrice() {
         return price;
@@ -83,6 +80,16 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 
     

@@ -19,7 +19,7 @@ import com.tvh.bookstore.entity.Book;
 import com.tvh.bookstore.service.IBookService;
 
 @RestController
-@RequestMapping("/api/books")
+// @RequestMapping("/api/books")
 public class BookController {
     @Autowired
     private IBookService bookService;
@@ -34,11 +34,7 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/admin/savebook")
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book savedBook = bookService.addBook(book);
-        return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
-    }
+   
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateBook(@PathVariable int id, @RequestBody Book bookDetails) {

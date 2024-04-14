@@ -21,11 +21,11 @@ public class ReqRes {
     private String token;
     private String refreshToken;
     private String expirationTime;
-    private String name;
+    private String userName;
     private String email;
     private String role;
     private String password;
     private List<Book> book;
     private User user;
-
+    
 }
